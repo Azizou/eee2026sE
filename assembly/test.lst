@@ -1,0 +1,113 @@
+ARM GAS  practical3.s 			page 1
+
+
+   1              	@OGBAZI001 PRKYUM003
+   2              	    .syntax unified
+   3              	    .global _start
+   4              	    .cpu cortex-m0
+   5              	    .thumb
+   6              	vectors:
+   7 0000 00200020 	    .word 0x20002000
+   8 0004 01000000 	    .word _start + 1
+   9              	_start:
+  10 0008 1C48     	    LDR R0, =0x40021000                 
+  11 000a 4169     	    LDR R1, [R0, #0x14]                 
+  12 000c 1C4A     	    LDR R2, =0b1100000000000000000     
+  13 000e 1143     	    ORRS R1, R1, R2                     
+  14 0010 4161     	    STR R1, [R0, #0x14]
+  15 0012 1C48     		LDR R0, =0x48000400                 
+  16 0014 0168     	    LDR R1, [R0]                        
+  17 0016 1C4A     	    LDR R2, =0b0101010101010101         
+  18 0018 1143     	    ORRS R1, R1, R2                     
+  19 001a 0160     	    STR R1, [R0]                        
+  20 001c 1B4B     		LDR R3, =0x48000000                 
+  21 001e 1C4A     		LDR R2,=0x5
+  22 0020 DA60     		STR R2,[R3,0x0C]
+  23              	ButtonS0a:
+  24 0022 1969     		LDR R1,[R3,0x10]
+  25 0024 0122     		MOVS R2,1
+  26 0026 1140     		ANDS R1,R2,R1
+  27 0028 0129     		CMP R1,1
+  28 002a 03D1     		BNE display_FF
+  29              	display_AA:
+  30 002c AA22     	    MOVS R2, #0xAA                         
+  31 002e 4261     	    STR R2, [R0, #0x14]                 
+  32 0030 184E     		LDR R6,=#1000000
+  33 0032 03E0     		B ButtonS1a
+  34              	display_FF:
+  35 0034 FF22     		MOVS R2, #0xFF                      
+  36 0036 1143     	    ORRS R1, R1, R2                     
+  37 0038 4261     	    STR R2, [R0, #0x14]                 
+  38 003a 164E     		LDR R6,=#1000000
+  39              	ButtonS1a:
+  40 003c 1969     		LDR R1,[R3,0x10]
+  41 003e 0222     		MOVS R2,0b10
+  42 0040 1140     		ANDS R1,R2,R1
+  43 0042 0229     		CMP R1,0b10
+  44 0044 00D1     		BNE NewR6
+  45 0046 00D0     		BEQ delay1
+  46              		
+  47 0048 134E     	NewR6: LDR R6,=#500000	@500000
+  48              	delay1:
+  49 004a 013E     		SUBS R6,R6,#1
+  50 004c FDD1     		BNE delay1
+  51              	ButtonS0b:
+  52 004e 1969     		LDR R1,[R3,0x10]
+  53 0050 0122     		MOVS R2,1
+  54 0052 1140     		ANDS R1,R2,R1
+  55 0054 0129     		CMP R1,1
+  56 0056 03D1     		BNE display_00
+  57              	display_55:
+ARM GAS  practical3.s 			page 2
+
+
+  58 0058 5522     		MOVS R2, #0x55                     
+  59 005a 4261     	    STR R2, [R0, #0x14]                
+  60 005c 0D4E     		LDR R6,=#1000000			@#1000000
+  61 005e 02E0     		B ButtonS1b
+  62              	display_00:
+  63 0060 0022     		MOVS R2, #0x00                      
+  64 0062 4261     	    STR R2, [R0, #0x14]                 
+  65 0064 0B4E     		LDR R6,=#1000000			@#1000000
+  66              	ButtonS1b:
+  67 0066 1969     		LDR R1,[R3,0x10]
+  68 0068 0222     		MOVS R2,0b10
+  69 006a 1140     		ANDS R1,R2,R1
+  70 006c 0229     		CMP R1,0b10
+  71 006e 00D1     		BNE NewR62
+  72 0070 00D0     		BEQ delay2	
+  73 0072 094E     	NewR62: LDR R6,=#500000	@500000
+  74              	delay2:
+  75 0074 013E     		SUBS R6,R6,#1
+  76 0076 FDD1     		BNE delay2
+  77              	end: 
+  78 0078 D3E70000 		B ButtonS0a...
+  78      00100240 
+  78      00000600 
+  78      00040048 
+  78      55550000 
+ARM GAS  practical3.s 			page 3
+
+
+DEFINED SYMBOLS
+        practical3.s:9      .text:00000008 _start
+        practical3.s:6      .text:00000000 vectors
+                            .text:00000000 $d
+        practical3.s:10     .text:00000008 $t
+        practical3.s:23     .text:00000022 ButtonS0a
+        practical3.s:34     .text:00000034 display_FF
+        practical3.s:29     .text:0000002c display_AA
+        practical3.s:39     .text:0000003c ButtonS1a
+        practical3.s:47     .text:00000048 NewR6
+        practical3.s:48     .text:0000004a delay1
+        practical3.s:51     .text:0000004e ButtonS0b
+        practical3.s:62     .text:00000060 display_00
+        practical3.s:57     .text:00000058 display_55
+        practical3.s:66     .text:00000066 ButtonS1b
+        practical3.s:73     .text:00000072 NewR62
+        practical3.s:74     .text:00000074 delay2
+        practical3.s:77     .text:00000078 end
+        practical3.s:78     .text:0000007a $d
+                   .debug_aranges:0000000c $d
+
+NO UNDEFINED SYMBOLS
