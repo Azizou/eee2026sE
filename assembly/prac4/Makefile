@@ -1,7 +1,7 @@
 	
 run:
-	cp -fv practical3.s practical3_copy.s
-	arm-none-eabi-as -g -a=test.lst -o test.o corr.s
+	cp -fv prac4.s practical3_copy.s
+	arm-none-eabi-as -g -a=test.lst -o test.o prac4.s
 	arm-none-eabi-ld -Ttext=0x08000000 -o main.elf test.o
 	arm-none-eabi-gdb main.elf
 	
