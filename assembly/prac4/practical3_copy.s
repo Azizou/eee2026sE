@@ -80,7 +80,9 @@ find_min_unsigned:
 	BNE find_min_unsigned
 	
 	LDR R4,=0x20000000 @ram start
-	LDRB R7,[R4] @to stores the maximum signed byte
+	//LDRB R7,[R4] @to stores the maximum signed byte
+	MOVS R7, 0x0
+	MOVS R2,0x80
 	B find_max_signed
 	
 set_min_unsinged:
@@ -89,9 +91,10 @@ set_min_unsinged:
 	B find_min_unsigned	
 	
 find_max_signed:
-	LDRB R5,[R4]
-	CMP R7,R5
-	BGT set_signed_max
+	
+	//CMP R2,R5
+	BL set_signed_max
+	//BLO set_signed_max
 	ADDS R4,#1
 	CMP R4,R6
 	BNE find_max_signed
@@ -99,41 +102,55 @@ find_max_signed:
 	B ButtonS0
 	
 set_signed_max:
+	LDRB R5,[R4]
+	
+	@ADDS R4,#1
+	CMP R5,R2
+	BHI partial
+	CMP R7,R5
+	BLO set_max
+	
+	BX LR //find_max_signed
+	
+	
+partial:	BX LR
+
+set_max:
 	MOVS R7,R5
 	STRB R5,[R6,#3]
-	B find_max_signed
+	BX LR
 	
 ButtonS0:
 	LDR R5,[R3,0x10]
-	MOVS R6,1			@Check if S0 is pressed
-	ANDS R5,R5,R6
+	MOVS R1,1			@Check if S0 is pressed
+	ANDS R5,R5,R1
 	@CMP R1,1
 	BEQ display_MIN_unsigned
 	
 ButtonS1:
 	LDR R5,[R3,0x10]		@Load input data register's content
-	MOVS R6,0b10			@Check if S1 is pressed
-	ANDS R5,R6,R5
+	MOVS R1,0b10			@Check if S1 is pressed
+	ANDS R5,R1,R5
 	BEQ display_MAX_signed
 	
 display_MAX_unsigned:
-								@LDRB R2,[R6,#1]                         
-    STR R1, [R0, #0x14]                 
+	LDRB R2,[R6,#1]							@LDRB R2,[R6,#1]                         
+    STR R2, [R0, #0x14]                 
 	B ButtonS0
 
 display_MIN_unsigned:
-							@LDRB R2,[R6,#2]                         
+	LDRB R2,[R6,#2]						@LDRB R2,[R6,#2]                         
     STR R2, [R0, #0x14]                 
 	B ButtonS0
 	
 display_MAX_signed:
-								@LDRB R2,[R6,#3]                         
-    STR R7, [R0, #0x14]                 
+	LDRB R2,[R6,#3]							@LDRB R2,[R6,#3]                         
+    STR R2, [R0, #0x14]                 
 	B ButtonS0
 	
         .align  @ all data accesses on the Cortex-M0 must be aligned data accesses. 
 start_of_data:
-        /*.word 0x22f65244
+        .word 0x22f65244
         .word 0x4e66eca3
         .word 0x25c1c308
         .word 0xe278d1ca
@@ -159,9 +176,9 @@ start_of_data:
         .word 0xcf205f79
         .word 0xb1192a24
         .word 0x79cf44e2
-        .word 0x371ce3ba*/
+        .word 0x371ce3ba
         .word 0x7a279ff5
-        .word 0x6047dc/*
+        .word 0x6047dc
         .word 0xfa165142
         .word 0x12690fdc
         .word 0x5aad829e
@@ -181,7 +198,7 @@ start_of_data:
         .word 0xcee8ec8d
         .word 0xca09fbe7
         .word 0x45ec4e32
-        .word 0xa11ccfb5*/
+        .word 0xa11ccfb5
         .word 0x95584228
 end_of_data:    @ we label the NEXT address as the end pointer. This is data we do not want to copy. 
                 @ Hence, the conditional loop should run while the source poiter is not pointing to end_of_data.		

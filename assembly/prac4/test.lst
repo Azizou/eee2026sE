@@ -12,28 +12,28 @@ ARM GAS  prac4.s 			page 1
    9              		
   10              		
   11              	_start:
-  12 0008 2B48     	    LDR R0, =0x40021000                 
+  12 0008 5F48     	    LDR R0, =0x40021000                 
   13 000a 4169     	    LDR R1, [R0, #0x14]                 
-  14 000c 2B4A     	    LDR R2, =0b1100000000000000000     
+  14 000c 5F4A     	    LDR R2, =0b1100000000000000000     
   15 000e 1143     	    ORRS R1, R1, R2                     
   16 0010 4161     	    STR R1, [R0, #0x14]
   17              		
-  18 0012 2B48     		LDR R0, =0x48000400                 
+  18 0012 5F48     		LDR R0, =0x48000400                 
   19 0014 0168     	    LDR R1, [R0]                        
-  20 0016 2B4A     	    LDR R2, =0b0101010101010101         
+  20 0016 5F4A     	    LDR R2, =0b0101010101010101         
   21 0018 1143     	    ORRS R1, R1, R2                     
   22 001a 0160     	    STR R1, [R0]                  
   23              		
-  24 001c 2A4B     		LDR R3, =0x48000000                 
-  25 001e 2B4A     		LDR R2,=0x5				@Set up pull up resistors
+  24 001c 5E4B     		LDR R3, =0x48000000                 
+  25 001e 5F4A     		LDR R2,=0x5				@Set up pull up resistors
   26 0020 DA60     		STR R2,[R3,0x0C]
   27              		
   28              		
   29              		
   30              		@LDR R7, first
-  31 0022 2B4D     		LDR R5, =start_of_data  @source
-  32 0024 2B4C     		LDR R4, =0x20000000		@destination
-  33 0026 2C4E     		LDR R6, =end_of_data	@address of last data limit
+  31 0022 5F4D     		LDR R5, =start_of_data  @source
+  32 0024 5F4C     		LDR R4, =0x20000000		@destination
+  33 0026 604E     		LDR R6, =end_of_data	@address of last data limit
   34 0028 761B     		SUBS R6,R6,R5			@Get the size of the data to be copied to RAM
   35 002a 3619     		ADDS R6,R6,R4			@get address of last word to put in RAM
   36              	copy_to_RAM:
@@ -43,7 +43,7 @@ ARM GAS  prac4.s 			page 1
   40 0032 0434     		ADDS R4,#4
   41 0034 B442     		CMP R4,R6
   42 0036 F9D1     		BNE copy_to_RAM
-  43 0038 264C     		LDR R4,=0x20000000	@reset R4 to first byte in RAM	before moving to copy_to_RAM_complete
+  43 0038 5A4C     		LDR R4,=0x20000000	@reset R4 to first byte in RAM	before moving to copy_to_RAM_complete
   44              	
   45              	copy_to_RAM_complete:
   46 003a 2578     		LDRB R5,[R4]
@@ -52,7 +52,7 @@ ARM GAS  prac4.s 			page 1
   49 0040 0134     		ADDS R4,#1
   50 0042 B442     		CMP R4,R6
   51 0044 F9D1     		BNE copy_to_RAM_complete
-  52 0046 234C     		LDR R4,=0x20000000 @Reset R4 to first byte in RAM	before moving to copy_to_RAM_complete
+  52 0046 574C     		LDR R4,=0x20000000 @Reset R4 to first byte in RAM	before moving to copy_to_RAM_complete
   53 0048 2178     		LDRB R1,[R4] @To store the maximum unsigned byte
   54              	
   55              	increment_of_bytes_complete:
@@ -68,7 +68,7 @@ ARM GAS  prac4.s 			page 1
   62 0052 B442     		CMP R4,R6
   63 0054 F9D1     		BNE find_max_unsigned
   64              		
-  65 0056 1F4C     		LDR R4,=0x20000000 @Reset R4 to RAM start
+  65 0056 534C     		LDR R4,=0x20000000 @Reset R4 to RAM start
   66 0058 2278     		LDRB R2,[R4] @to stores the minimum unsigned byte
   67 005a 02E0     		B find_min_unsigned
   68              		
@@ -80,127 +80,144 @@ ARM GAS  prac4.s 			page 1
   74              	find_min_unsigned:
   75 0062 2578     		LDRB R5,[R4]
   76 0064 9542     		CMP R5,R2
-  77 0066 05D3     		BLO set_min_unsinged
+  77 0066 06D3     		BLO set_min_unsinged
   78 0068 0134     		ADDS R4,#1
   79 006a B442     		CMP R4,R6
   80 006c F9D1     		BNE find_min_unsigned
   81              		
-  82 006e 194C     		LDR R4,=0x20000000 @ram start
-  83 0070 2778     		LDRB R7,[R4] @to stores the maximum signed byte
-  84 0072 02E0     		B find_max_signed
-  85              		
-  86              	set_min_unsinged:
-  87 0074 2A00     		MOVS R2,R5
-  88 0076 B570     		STRB R5,[R6,#2]
-  89 0078 F3E7     		B find_min_unsigned	
-  90              		
-  91              	find_max_signed:
-  92 007a 2578     		LDRB R5,[R4]
-  93 007c AF42     		CMP R7,R5
-  94 007e 03DC     		BGT set_signed_max
-  95 0080 0134     		ADDS R4,#1
-  96 0082 B442     		CMP R4,R6
-  97 0084 F9D1     		BNE find_max_signed
-  98              		
-  99 0086 02E0     		B ButtonS0
- 100              		
- 101              	set_signed_max:
- 102 0088 2F00     		MOVS R7,R5
- 103 008a F570     		STRB R5,[R6,#3]
- 104 008c F5E7     		B find_max_signed
- 105              		
- 106              	ButtonS0:
- 107 008e 1D69     		LDR R5,[R3,0x10]
- 108 0090 0126     		MOVS R6,1			@Check if S0 is pressed
- 109 0092 3540     		ANDS R5,R5,R6
- 110              		@CMP R1,1
- 111 0094 05D0     		BEQ display_MIN_unsigned
+  82 006e 4D4C     		LDR R4,=0x20000000 @ram start
+  83              		//LDRB R7,[R4] @to stores the maximum signed byte
+  84 0070 0027     		MOVS R7, 0x0
+  85 0072 8022     		MOVS R2,0x80
+  86 0074 02E0     		B find_max_signed
+  87              		
+  88              	set_min_unsinged:
+  89 0076 2A00     		MOVS R2,R5
+  90 0078 B570     		STRB R5,[R6,#2]
+  91 007a F2E7     		B find_min_unsigned	
+  92              		
+  93              	find_max_signed:
+  94              		
+  95              		//CMP R2,R5
+  96 007c 00F004F8 		BL set_signed_max
+  97              		//BLO set_signed_max
+  98 0080 0134     		ADDS R4,#1
+  99 0082 B442     		CMP R4,R6
+ 100 0084 FAD1     		BNE find_max_signed
+ 101              		
+ 102 0086 09E0     		B ButtonS0
+ 103              		
+ 104              	set_signed_max:
+ 105 0088 2578     		LDRB R5,[R4]
+ 106              		
+ 107              		@ADDS R4,#1
+ 108 008a 9542     		CMP R5,R2
+ 109 008c 02D8     		BHI partial
+ 110 008e AF42     		CMP R7,R5
+ 111 0090 01D3     		BLO set_max
  112              		
- 113              	ButtonS1:
- 114 0096 1D69     		LDR R5,[R3,0x10]		@Load input data register's content
+ 113 0092 7047     		BX LR //find_max_signed
+ 114              		
 ARM GAS  prac4.s 			page 3
 
 
- 115 0098 0226     		MOVS R6,0b10			@Check if S1 is pressed
- 116 009a 3540     		ANDS R5,R6,R5
- 117 009c 03D0     		BEQ display_MAX_signed
- 118              		
- 119              	display_MAX_unsigned:
- 120              									@LDRB R2,[R6,#1]                         
- 121 009e 4161     	    STR R1, [R0, #0x14]                 
- 122 00a0 F5E7     		B ButtonS0
- 123              	
- 124              	display_MIN_unsigned:
- 125              								@LDRB R2,[R6,#2]                         
- 126 00a2 4261     	    STR R2, [R0, #0x14]                 
- 127 00a4 F3E7     		B ButtonS0
- 128              		
- 129              	display_MAX_signed:
- 130              									@LDRB R2,[R6,#3]                         
- 131 00a6 4761     	    STR R7, [R0, #0x14]                 
- 132 00a8 F1E7     		B ButtonS0
- 133              		
- 134 00aa C046     	        .align  @ all data accesses on the Cortex-M0 must be aligned data accesses. 
- 135              	start_of_data:
- 136              	        /*.word 0x22f65244
- 137              	        .word 0x4e66eca3
- 138              	        .word 0x25c1c308
- 139              	        .word 0xe278d1ca
- 140              	        .word 0x10e865fe
- 141              	        .word 0x839b17fb
- 142              	        .word 0xde6ac773
- 143              	        .word 0x49a0392b
- 144              	        .word 0x442b580
- 145              	        .word 0xae6e269d
- 146              	        .word 0xcb220366
- 147              	        .word 0x603debbe
- 148              	        .word 0xfd88b1bf
- 149              	        .word 0x49c5652f
- 150              	        .word 0x25476c5a
- 151              	        .word 0xa5c40771
- 152              	        .word 0xb04d908d
- 153              	        .word 0x831c1806
- 154              	        .word 0x5b4f75d4
- 155              	        .word 0x6b016b93
- 156              	        .word 0x90dcb11a
- 157              	        .word 0xefb6e394
- 158              	        .word 0x44db27da
- 159              	        .word 0xcf205f79
- 160              	        .word 0xb1192a24
- 161              	        .word 0x79cf44e2
- 162              	        .word 0x371ce3ba*/
- 163 00ac F59F277A 	        .word 0x7a279ff5
- 164 00b0 DC476000 	        .word 0x6047dc/*
- 165              	        .word 0xfa165142
- 166              	        .word 0x12690fdc
- 167              	        .word 0x5aad829e
- 168              	        .word 0x19244ba0
- 169              	        .word 0xb5174a3
- 170              	        .word 0xbd7172c8
- 171              	        .word 0x1d3b229f
+ 115              		
+ 116 0094 7047     	partial:	BX LR
+ 117              	
+ 118              	set_max:
+ 119 0096 2F00     		MOVS R7,R5
+ 120 0098 F570     		STRB R5,[R6,#3]
+ 121 009a 7047     		BX LR
+ 122              		
+ 123              	ButtonS0:
+ 124 009c 1D69     		LDR R5,[R3,0x10]
+ 125 009e 0121     		MOVS R1,1			@Check if S0 is pressed
+ 126 00a0 0D40     		ANDS R5,R5,R1
+ 127              		@CMP R1,1
+ 128 00a2 06D0     		BEQ display_MIN_unsigned
+ 129              		
+ 130              	ButtonS1:
+ 131 00a4 1D69     		LDR R5,[R3,0x10]		@Load input data register's content
+ 132 00a6 0221     		MOVS R1,0b10			@Check if S1 is pressed
+ 133 00a8 0D40     		ANDS R5,R1,R5
+ 134 00aa 05D0     		BEQ display_MAX_signed
+ 135              		
+ 136              	display_MAX_unsigned:
+ 137 00ac 7278     		LDRB R2,[R6,#1]							@LDRB R2,[R6,#1]                         
+ 138 00ae 4261     	    STR R2, [R0, #0x14]                 
+ 139 00b0 F4E7     		B ButtonS0
+ 140              	
+ 141              	display_MIN_unsigned:
+ 142 00b2 B278     		LDRB R2,[R6,#2]						@LDRB R2,[R6,#2]                         
+ 143 00b4 4261     	    STR R2, [R0, #0x14]                 
+ 144 00b6 F1E7     		B ButtonS0
+ 145              		
+ 146              	display_MAX_signed:
+ 147 00b8 F278     		LDRB R2,[R6,#3]							@LDRB R2,[R6,#3]                         
+ 148 00ba 4261     	    STR R2, [R0, #0x14]                 
+ 149 00bc EEE7     		B ButtonS0
+ 150              		
+ 151 00be C046     	        .align  @ all data accesses on the Cortex-M0 must be aligned data accesses. 
+ 152              	start_of_data:
+ 153 00c0 4452F622 	        .word 0x22f65244
+ 154 00c4 A3EC664E 	        .word 0x4e66eca3
+ 155 00c8 08C3C125 	        .word 0x25c1c308
+ 156 00cc CAD178E2 	        .word 0xe278d1ca
+ 157 00d0 FE65E810 	        .word 0x10e865fe
+ 158 00d4 FB179B83 	        .word 0x839b17fb
+ 159 00d8 73C76ADE 	        .word 0xde6ac773
+ 160 00dc 2B39A049 	        .word 0x49a0392b
+ 161 00e0 80B54204 	        .word 0x442b580
+ 162 00e4 9D266EAE 	        .word 0xae6e269d
+ 163 00e8 660322CB 	        .word 0xcb220366
+ 164 00ec BEEB3D60 	        .word 0x603debbe
+ 165 00f0 BFB188FD 	        .word 0xfd88b1bf
+ 166 00f4 2F65C549 	        .word 0x49c5652f
+ 167 00f8 5A6C4725 	        .word 0x25476c5a
+ 168 00fc 7107C4A5 	        .word 0xa5c40771
+ 169 0100 8D904DB0 	        .word 0xb04d908d
+ 170 0104 06181C83 	        .word 0x831c1806
+ 171 0108 D4754F5B 	        .word 0x5b4f75d4
 ARM GAS  prac4.s 			page 4
 
 
- 172              	        .word 0xada0357e
- 173              	        .word 0x1d44e4e6
- 174              	        .word 0x37caa86e
- 175              	        .word 0x6a08fc5d
- 176              	        .word 0x465faee1
- 177              	        .word 0x2e52e372
- 178              	        .word 0xd6016409
- 179              	        .word 0x52012177
- 180              	        .word 0x848249e0
- 181              	        .word 0xcee8ec8d
- 182              	        .word 0xca09fbe7
- 183              	        .word 0x45ec4e32
- 184              	        .word 0xa11ccfb5*/
- 185 00b4 28425895 	        .word 0x95584228
- 186              	end_of_data:    @ we label the NEXT address as the end pointer. This is data we do not want to copy
- 187 00b8 00100240 	                @ Hence, the conditional loop should run while the source poiter is not pointing to
- 187      00000600 
- 187      00040048 
- 187      55550000 
- 187      00000048 
+ 172 010c 936B016B 	        .word 0x6b016b93
+ 173 0110 1AB1DC90 	        .word 0x90dcb11a
+ 174 0114 94E3B6EF 	        .word 0xefb6e394
+ 175 0118 DA27DB44 	        .word 0x44db27da
+ 176 011c 795F20CF 	        .word 0xcf205f79
+ 177 0120 242A19B1 	        .word 0xb1192a24
+ 178 0124 E244CF79 	        .word 0x79cf44e2
+ 179 0128 BAE31C37 	        .word 0x371ce3ba
+ 180 012c F59F277A 	        .word 0x7a279ff5
+ 181 0130 DC476000 	        .word 0x6047dc
+ 182 0134 425116FA 	        .word 0xfa165142
+ 183 0138 DC0F6912 	        .word 0x12690fdc
+ 184 013c 9E82AD5A 	        .word 0x5aad829e
+ 185 0140 A04B2419 	        .word 0x19244ba0
+ 186 0144 A374510B 	        .word 0xb5174a3
+ 187 0148 C87271BD 	        .word 0xbd7172c8
+ 188 014c 9F223B1D 	        .word 0x1d3b229f
+ 189 0150 7E35A0AD 	        .word 0xada0357e
+ 190 0154 E6E4441D 	        .word 0x1d44e4e6
+ 191 0158 6EA8CA37 	        .word 0x37caa86e
+ 192 015c 5DFC086A 	        .word 0x6a08fc5d
+ 193 0160 E1AE5F46 	        .word 0x465faee1
+ 194 0164 72E3522E 	        .word 0x2e52e372
+ 195 0168 096401D6 	        .word 0xd6016409
+ 196 016c 77210152 	        .word 0x52012177
+ 197 0170 E0498284 	        .word 0x848249e0
+ 198 0174 8DECE8CE 	        .word 0xcee8ec8d
+ 199 0178 E7FB09CA 	        .word 0xca09fbe7
+ 200 017c 324EEC45 	        .word 0x45ec4e32
+ 201 0180 B5CF1CA1 	        .word 0xa11ccfb5
+ 202 0184 28425895 	        .word 0x95584228
+ 203              	end_of_data:    @ we label the NEXT address as the end pointer. This is data we do not want to copy
+ 204 0188 00100240 	                @ Hence, the conditional loop should run while the source poiter is not pointing to
+ 204      00000600 
+ 204      00040048 
+ 204      55550000 
+ 204      00000048 
 ARM GAS  prac4.s 			page 5
 
 
@@ -209,23 +226,25 @@ DEFINED SYMBOLS
              prac4.s:6      .text:00000000 vectors
                             .text:00000000 $d
              prac4.s:12     .text:00000008 $t
-             prac4.s:135    .text:000000ac start_of_data
-             prac4.s:186    .text:000000b8 end_of_data
+             prac4.s:152    .text:000000c0 start_of_data
+             prac4.s:203    .text:00000188 end_of_data
              prac4.s:36     .text:0000002c copy_to_RAM
              prac4.s:45     .text:0000003a copy_to_RAM_complete
              prac4.s:55     .text:0000004a increment_of_bytes_complete
              prac4.s:57     .text:0000004a find_max_unsigned
              prac4.s:69     .text:0000005c set_max_unsinged
              prac4.s:74     .text:00000062 find_min_unsigned
-             prac4.s:86     .text:00000074 set_min_unsinged
-             prac4.s:91     .text:0000007a find_max_signed
-             prac4.s:101    .text:00000088 set_signed_max
-             prac4.s:106    .text:0000008e ButtonS0
-             prac4.s:124    .text:000000a2 display_MIN_unsigned
-             prac4.s:113    .text:00000096 ButtonS1
-             prac4.s:129    .text:000000a6 display_MAX_signed
-             prac4.s:119    .text:0000009e display_MAX_unsigned
-             prac4.s:163    .text:000000ac $d
+             prac4.s:88     .text:00000076 set_min_unsinged
+             prac4.s:93     .text:0000007c find_max_signed
+             prac4.s:104    .text:00000088 set_signed_max
+             prac4.s:123    .text:0000009c ButtonS0
+             prac4.s:116    .text:00000094 partial
+             prac4.s:118    .text:00000096 set_max
+             prac4.s:141    .text:000000b2 display_MIN_unsigned
+             prac4.s:130    .text:000000a4 ButtonS1
+             prac4.s:146    .text:000000b8 display_MAX_signed
+             prac4.s:136    .text:000000ac display_MAX_unsigned
+             prac4.s:153    .text:000000c0 $d
                    .debug_aranges:0000000c $d
 
 NO UNDEFINED SYMBOLS

@@ -1,0 +1,1261 @@
+
+<!-- saved from url=(0062)http://www.vogella.com/tutorials/AndroidDrawables/article.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      
+      <title>Android Drawables - Tutorial</title>
+      <script type="text/javascript" async="" src="./Android Drawables - Tutorial_files/ga.js"></script><script type="text/javascript">window.mod_pagespeed_start = Number(new Date());</script><link rel="stylesheet" type="text/css" href="./Android Drawables - Tutorial_files/A.articles.css.pagespeed.cf.gZJqTjSP1p.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
+      <meta name="description" content="Android Drawables This tutorial describes the usage of Drawables in Android.">
+      <link rel="shortcut icon" href="http://www.vogella.com/favicon.ico">
+   <style type="text/css"></style><script type="text/javascript" async="" src="http://cdn1.developermedia.com/a.min.js"></script><script type="text/javascript" async="" src="http://cdn2.developermedia.com/a.min.js"></script></head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      
+      
+      <!-- Google analytics (Jennifer) -->
+      
+      <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-3967758-1']);_gaq.push(['_setDomainName','vogella.com']);_gaq.push(['_setAllowLinker',true]);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();</script>
+      
+      
+      
+      <!-- Load jQuery -->
+      <script type="text/javascript" src="./Android Drawables - Tutorial_files/jquery.js.pagespeed.jm.LynoS8h5RR.js"></script>
+      
+      <!-- jQuery Hide Buttons -->
+      <script type="text/javascript">//<![CDATA[
+var fixed=false;$(document).scroll(function(){if($(this).scrollTop()>900){if(!fixed){fixed=true;$('.book-buttons').css({display:'block'});$('.twitter').css({display:'block'});}}else{if(fixed){fixed=false;$('.book-buttons').css({display:'none'});$('.twitter').css({display:'none'});}}});
+//]]></script>
+      
+      
+      <!-- Lake Quincy Ads -->
+      <script type="text/javascript">function _dmBootstrap(file){var _dma=document.createElement('script');_dma.type='text/javascript';_dma.async=true;_dma.src=('https:'==document.location.protocol?'https://':'http://')+file;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(_dma);}
+function _dmFollowup(file){if(typeof DMAds==='undefined')_dmBootstrap('cdn2.DeveloperMedia.com/a.min.js');}
+(function(){_dmBootstrap('cdn1.DeveloperMedia.com/a.min.js');setTimeout(_dmFollowup,2000);})();</script>
+      
+      <div id="headerpart">
+         	
+         <div id="topnav">
+            		
+            <ul id="home" class="topnav">
+               			
+               <li>
+                  				<a class="homebutton" title="Home" href="http://www.vogella.com/">vogella.com</a>
+                  			
+               </li>
+               
+               			
+               <li>
+                  				<a title="Tutorials" href="http://www.vogella.com/tutorials/">Tutorials</a>
+                  			
+               </li>
+               
+               			
+               <li>
+                  				<a title="Training" href="http://www.vogella.com/training/">Training</a>
+                  			
+               </li>
+               
+               			
+               <li>
+                  				<a title="Books" href="http://www.vogella.com/books/">Books</a>
+                  			
+               </li>
+               			
+               			
+               <li>
+                  				<a title="Blog" href="http://blog.vogella.com/">Blog</a>
+                  			
+               </li>
+               
+               			
+               <li>
+                  				<a title="Shop" href="http://vogella-shop.spreadshirt.de/">Shop</a>
+                  			
+               </li>
+               
+               			
+               <li>
+                  				<a title="Contact vogella GmbH" href="http://www.vogella.com/contact.html">Contact us</a>
+                  			
+               </li>
+               		
+            </ul>
+            	
+         </div> 
+         <!-- topnav -->
+         
+         	
+         <div id="logo">
+            		<a title="vogella.com" href="http://www.vogella.com/">
+               			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAAAkCAMAAABbsy/+AAACzVBMVEX///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9LpYSEAAAA7nRSTlMAAQIDBAUGBwgJCgsMDQ4PEBITFBUWFxgZGhscHR4fICEiIyUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQ0RFRkdISktMTk9QUVJTVFVWWFlaW1xdXl9gYWJjZGZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX6AgYKDhIWGh4iJi42Oj5CRkpOUlZeYmZqbnJ2en6ChoqSlpqeoqaqrrK2ur7CxsrO0tba3uLq7vb6/wMLExcbHyMnKy8zNzs/Q0dLT1NXW19jZ2tvc3d7f4OHj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+T4Vr0gAABPBJREFUSMfll+lfVGUUx78zLIO4JuWOkTtmLqiYhlqZ5r6glplpo0XmvmRiUS5AGoqKuaRhWS6BAYKaS5GRaa6gAuEGwmCjwgy/v6EXd9AZpE/YR171vDr3/J7nfu8997nnOQf+H8NncMze3/My98a86F3bqKfWFkmS/YakW7GNaxNlnlsi5a99s4sXgaM+zVTxXFOtserukbS1UeWl6X27vq1bS6wGmdLV4e6e9sf0S/1aYZn2SaVPe/q8jmpPrURyiaTpVZ3t7VpSC6wWd6QDJmgd5OGeJXvzxw/bIDmCwHuXir7sAGDq3Bsw/6wNj53VqFw6CWD6XHJEmoPirt8OAYhSWcPHDRsvaTMAfuclnXGodAAAo6Twxw3bLumdys8kSXldjasgacej3254fHwQDI6Pf7Y69aSkUMN8XpI0njFZCQBFynp0WL/d6g0DD6hzdWqhJONduuVJkoqfbH1tGUC2rv2HSIUrFIh1WqrRLJI0AqDXbUmS8usO/WsIQImc5v8K259dbfoolzQbCCy4HJEtSY6IIo01vtl1sPgZB46vn58PQEDfJvfXenft5g9+xgz/Xm1ND2DZ+wHahbXyTEO5kg4BHfuYSJUkh3TaF7BKh/HO0SEADkmzMVmvSMqbaQawxNkl57ZOUgK0TXdKt+aYXDCLMwae+1VS/jB32BFJamfYOUYgtRvgmLQJWF/xDAAp9wIs6do3MSR8p47VA6+jFatf6T29IFPzYZD9fGSHdssd61ywznobcjL6N+/70z33bblMkrYA0MvF0mfAq5LmA90VCVCn5GtWaQoAY5wbYaomATSzyUr9Kz/6Aqx0Bhuw0eqP+UInoJVWusG6S5JGA6yphM2CxrmVv8SJHBMwQYPaOL9wrYlRN7IyDfsTWZmrEACa6SMDtlhNoUdTgMK97nE8LUmFXSC4rBI2Cr8MSakAzFAYkHrJ/Lr6upYEK8J8d7Vhj5OV7fbJxrAnGrCtxQDmrq8tWHo1w3OvSpLtZb8jlSz1eOKgJPUBoKF9E7R0fkisGlRuw7LNrbTQsENlJevuZdfYYcCOHwfLohuyZZ+9c9Cj/jgpSSrPu89SeL4kpbgmbLX5s8jRkoVq4/I01grf8mjDHior6dlV/rPibZh23o1uY4IsDxidSuU5Sr+RpMKOLv0FTeRcMrykCS7PEI3hjBFk3pOV6Ir6HrAmWkywPgbwsnvCGHs45Uy5G+y3U5JsPe/rZ1P7aCTUycnxNyrMkwWNiDKibDohK/0VZSTXyQYsTKMZb+hvqAqsRexN9xfL+b5Msoc90Oc5k656AwMrMloDTZM1AhreLBgAlhibrLDeMd0MhNkCCVco0xRMiCKBDvl/VoF5LXO4wzYkSecHuBewZVoBwITC22lxKbaSqQBdz+lqZsnNKbJCvYSKc9tX7793rQ/hCiXaYcG8S9/N21i4PCV3UtWD4fID1h8r0m686+MhL9hiZBGaLku68ENUC1e1OXblupkBPTUZoN+aw+eTZtSD3lvakHQR8Hkr7cKecczZElc1Hzf8INPFKg7+KuJRyoFJrgPKfVxI/rdVgRFrE9OSo7pxpGZVVYgVwCv99kN9iK8jusbPerFm1WlCAhCYqGkPKZ2q8f1T63SqRtO8Lun6idyK0qUPSyMVVlOYJbGGDzUsctOqqdU1V8P2BNS8f6qVjuJvSNm7AGdv8hEAAAAASUVORK5CYII=" alt="vogella.com"> 
+               		</a>
+            	
+         </div> 
+         <!-- logo -->
+         
+         	
+         <div id="searchfixed">
+            		
+            <form action="http://www.vogella.com/search.html" id="cse-search-box">
+               			
+               <div id="searchwrapper">
+                  
+                  				<input type="hidden" name="cx" value="partner-pub-3851443674951530:3991491935">
+                  				<input type="hidden" name="cof" value="FORID:10">
+                  				<input type="hidden" name="ie" value="UTF-8">
+                  				<input type="text" placeholder="Search" id="search_field" name="q" size="55">
+                  				<input type="image" src="./Android Drawables - Tutorial_files/xsrch.png.pagespeed.ic.BP8TtuQRzJ.png" id="search_button" name="sa" alt="Search">
+                  			
+               </div>
+               		
+            </form>
+            	
+         </div> 
+         <!-- searchfixed -->
+         
+         
+      </div> 
+      <!-- headerpart -->
+      
+      
+      
+      
+      <div id="leftcol">
+         
+         	Support free tutorials:
+         	<br>
+         	<br>
+         	
+         <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            		<input type="hidden" name="cmd" value="_s-xclick">
+            		<input type="hidden" name="hosted_button_id" value="10463995">
+            		<input type="image" src="./Android Drawables - Tutorial_files/160x80xvogella-donate.png.pagespeed.ic.sqhcKNBYjj.jpg" width="160" height="80" border="0" name="submit" alt="Donation">
+            	
+         </form>
+         
+         	<br>
+         	<br>
+         
+         	<script async="async" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+         	
+         <!-- LeftColumn -->
+         	<ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-3851443674951530" data-ad-slot="6294971031"></ins>
+         	<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+         
+         	<br>
+         	<br>
+         	<br>
+         	<br><br><br><br><br>
+         
+         	
+         <div data-type="ad" data-publisher="lqm.javaeclipseandroid.site" data-zone="ron" data-format="160x600"></div>
+         	
+         <p></p>
+         
+         
+         
+      </div> 
+      <!-- leftcolumn -->
+      
+      
+      
+      
+      <div id="rightcol">
+         
+         	
+         <!-- vogellas own advertising for training and books --> 	
+         	
+         <p class="training-bg">
+            		<a class="image-z" href="http://www.vogella.com/training/">
+               			<img src="./Android Drawables - Tutorial_files/200x364xvogellatraining_ad.png.pagespeed.ic.KQGlbyMRAP.png" height="364" width="200" alt="vogella training">
+               		</a>
+            		<a class="btn-training button1" href="http://www.vogella.com/training/">Training</a>
+            		<a class="btn-training button2" href="http://www.vogella.com/books/index.html">Books</a>
+            	
+         </p> 
+         	
+         	<br>
+         	<br>
+         
+         	
+         <!-- Chitika 160x600 Wide Skycraper code -->
+         	<script type="text/javascript">(function(){if(window.CHITIKA===undefined){window.CHITIKA={'units':[]};};var unit={"calltype":"async[2]","publisher":"vogella","width":160,"height":600,"sid":"Chitika Default"};var placement_id=window.CHITIKA.units.length;window.CHITIKA.units.push(unit);document.write('<div id="chitikaAdBlock-'+placement_id+'"></div>');}());</script><div id="chitikaAdBlock-0"></div>
+         	<script type="text/javascript" src="http://cdn.chitika.net/getads.js" async="async"></script>
+         	
+         	<div class="twitter" style="display: block;">
+            		
+            <div class="twitt">
+               			<a href="http://www.twitter.com/vogellacompany">
+                  				<img src="./Android Drawables - Tutorial_files/xtwitter.png.pagespeed.ic.jzAwobzXLA.png" alt="Follow me on twitter">
+                  			</a>
+               		
+            </div>
+            
+            		
+            <div class="googleplus">
+               			<a rel="me" href="https://profiles.google.com/104044918586174763681">
+                  				<img src="./Android Drawables - Tutorial_files/xgoogle.png.pagespeed.ic.vtrt42uiF7.png" alt="Lars Vogel on Google+">
+                  			</a>
+               		
+            </div>
+            	
+         </div> 
+         <!-- twitter -->
+         	
+         	
+         <div class="book-buttons" style="display: block;">
+            	
+            <div class="books">
+               	
+               	<a href="http://www.vogella.com/books/index.html">
+                  	<img src="./Android Drawables - Tutorial_files/xbooks.png.pagespeed.ic.cAm5icdowv.png" alt="Purchase books">
+                  	</a>
+               	
+               	<a href="http://www.vogella.com/support.html">
+                  	<img src="./Android Drawables - Tutorial_files/xdonate.png.pagespeed.ic.t1XNIwyNCl.png" alt="Support free tutorials">
+                  	</a>
+               	
+               
+            </div> 
+            <!-- books -->
+            
+         </div> 
+         <!-- book buttons -->
+         
+         
+      </div> 
+      <!--rightcol-->
+      
+      
+      
+      <div class="article">
+         <div class="titlepage">
+            <div>
+               <div xmlns:fo="http://www.w3.org/1999/XSL/Format" class="vogellalogo"><a rel="author" href="http://www.vogella.com/people/larsvogel.html"><img src="./Android Drawables - Tutorial_files/100x120xlars-hackagotchi.png.pagespeed.ic.gx2Sf13j9r.png" height="120" width="100" alt="Lars Vogel"></a></div>
+               <div>
+                  <h2 class="title"><a name="d41034e1"></a>Android Drawables - Tutorial
+                  </h2>
+               </div>
+               <div>
+                  <div class="author">
+                     <h3 class="author"><span class="firstname">Lars</span> <span class="surname">Vogel</span></h3>
+                  </div>
+               </div>
+               <div>
+                  <p class="releaseinfo">
+                     
+                     
+                  </p>
+                  <p>Version 2.1  </p>
+                  <p class="releaseinfo">
+                     
+                  </p>
+               </div>
+               <div>
+                  <p class="copyright">Copyright © 2009, 2010, 2011, 2012  Lars Vogel</p>
+               </div>
+               <div>
+                  <p class="pubdate">01.09.2010 - 20.12.2012</p>
+               </div>
+               <div>
+                  <div class="revhistory">
+                     <table summary="Revision History">
+                        <tbody><tr>
+                           <th align="left" valign="top" colspan="4"><b>Revision History</b></th>
+                        </tr>
+                        <tr>
+                           <td align="left">Revision 0.1</td>
+                           <td align="left">01.09.2010</td>
+                           <td align="left"><span class="firstname">Lars<br></span><span class="surname">Vogel<br></span></td>
+                           <td align="left">Created </td>
+                        </tr>
+                        <tr>
+                           <td align="left">Revision 0.2 - 2.1</td>
+                           <td align="left">13.12.2010 - 20.12.2012</td>
+                           <td align="left"><span class="firstname">Lars<br></span><span class="surname">Vogel<br></span></td>
+                           <td align="left">bug fixes and enhancements </td>
+                        </tr>
+                     </tbody></table>
+                  </div>
+               </div>
+               <div>
+                  <div class="abstract"><a name="abstract"></a><p class="title"><b>Android Drawables</b></p>
+                     <p> This tutorial describes the usage of Drawables in Android.
+                        
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <div>
+               <div xmlns:fo="http://www.w3.org/1999/XSL/Format" data-type="ad" data-publisher="lqm.javaeclipseandroid.site" data-zone="ron" data-format="728x90"></div>
+            </div>
+            <hr>
+         </div>
+         <div class="toc">
+            <p><b>Table of Contents</b></p>
+            <dl>
+               <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#drawables">1. What are Drawables?</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#accessdrawables">2. Using drawables for views</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#drawables_bitmaps">3. Loading Bitmaps and Drawables</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#xmldrawables">4. XML Drawables</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#drawables_shape">4.1. Shape Drawables</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#drawables_state">4.2. State Drawables</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#drawables_transition">4.3. Transition Drawables</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#animationdrawables">5. Animation Drawables</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#drawables_9patch">6. 9 Patch Drawables</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#drawables_custom1">7. Custom Drawables</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#drawables_custom2">8. Exercise: Create Custom Drawables</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#thankyou">9. Support this website</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#thankyou">9.1. Thank you</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#questions">9.2. Questions and Discussion</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#resources">10. Links and Literature</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#sourcecode">10.1. Source Code</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#resources_android">10.2. Android Widget Resources</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#resources_android">10.3. Android Resources</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#resources_general">10.4. vogella Resources</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>	
+         <script async="async" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+         
+         <!-- Article - After table of content -->
+         <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3851443674951530" data-ad-slot="6440098216"></ins>
+         <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="drawables"></a>1.&nbsp;What are Drawables?
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               A
+               <em class="wordasword">Drawable</em>
+               resource is a general concept for a graphic which can
+               be drawn. The
+               simplest case is a graphical file (bitmap), which would be represented
+               in Android
+               via a
+               <code class="code">BitmapDrawable</code>
+               class.
+               
+            </p>
+            <p>
+               Every Drawable is stored as individual files in one of the
+               <code class="filename">res/drawable</code>
+               folders. Typically you would store bitmaps for different resolutions
+               in the
+               <code class="filename">-mdpi</code>,
+               <code class="filename">-hdpi</code>,
+               <code class="filename">-xhdpi</code>,
+               <code class="filename">-xxhdpi</code>
+               subfolders of
+               <code class="filename">res/drawable</code>. The ADT project creation wizard
+               creates these
+               folders by default. If
+               these bitmaps are provided in different folder, the Android system
+               selects the correct one automatically based on the device
+               configuration.
+               
+            </p>
+            <p>
+               If you do not
+               provide bitmaps for all supported resolutions, the
+               the
+               Android system
+               scales
+               the closest fit up or down. This is typically
+               undesired as the bitmap might get blury.
+               
+            </p>
+            <p>In addition to graphical files, Android supports XML drawables
+               and 9-patch graphics. XML drawables are used to describe shapes
+               (color, border, gradient), state, transitions and more.
+               
+            </p>
+            <p>
+               9-patch graphics are used to define which part of a graphic
+               should be
+               stretched if the
+               view which uses this graphic is larger than
+               the graphic.
+               
+            </p>
+            <p>
+               Drawables can also be written in Java code. Every object which
+               implements
+               <code class="code">Drawable</code>
+               can be used as a
+               <code class="code">Drawable in code.</code>
+               
+            </p>
+         </div>
+         <!-- Lake Quincy Ads -->
+         <div data-type="ad" data-publisher="lqm.javaeclipseandroid.site" data-zone="ron" data-format="728x90">
+            
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="accessdrawables"></a>2.&nbsp;Using drawables for views
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               Drawables
+               are referred to
+               in XML
+               via
+               <em class="parameter"><code>@drawable/filename</code></em>
+               whereby
+               <em class="parameter"><code>filename</code></em>
+               filename is the filename without the file extension. For example to
+               access the
+               <code class="filename">res/drawable/hello.png</code>
+               Drawable, you would use
+               <em class="parameter"><code>@drawable/hello</code></em>
+               as demonstrated in the following snippet.
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting">&lt;TextView xmlns:android=<span class="hl-string" style="color:blue">"http://schemas.android.com/apk/res/android"</span>
+    android:id=<span class="hl-string" style="color:blue">"@+id/textView1"</span>
+    android:layout_width=<span class="hl-string" style="color:blue">"wrap_content"</span>
+    android:layout_height=<span class="hl-string" style="color:blue">"wrap_content"</span>
+    android:background=<span class="hl-string" style="color:blue">"@drawable/hello"</span>
+    android:text=<span class="hl-string" style="color:blue">"@string/hello_world"</span> /&gt; </pre><p>
+               
+            </p>
+            <p>
+               In code you can also assign
+               <em class="wordasword">drawables</em>
+               to views. Most
+               views
+               accept an resource ID as input parameter. For
+               example the following
+               code shows how to set a
+               <em class="wordasword">drawables</em>
+               as background to an
+               <code class="code">ImageView</code>.
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting">ImageView imageView = (ImageView) findViewById(R.id.image);
+imageView.setImageResource(R.drawable.hello); </pre><p>
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="drawables_bitmaps"></a>3.&nbsp;Loading Bitmaps and Drawables
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               Android allows you to use the
+               <code class="code">Bitmap</code>
+               class for working with bitmaps. This section explain how to create
+               <code class="code">Bitmap</code>
+               objects via Java code and how to convert
+               <code class="code">Bitmap</code>
+               into
+               <code class="code">Drawable</code>
+               objects and vice versa.
+               
+            </p>
+            <p>
+               If required you can
+               load any accessible
+               bitmap file
+               in your code and
+               convert them into
+               <code class="code">Drawables</code>
+               objects.
+               
+            </p>
+            <p>
+               The following example code shows how to create an
+               <code class="code">Bitmap</code>
+               object for the
+               <code class="filename">assets</code>
+               folder and assign it to an
+               <code class="code">ImageView</code>.
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting"><em class="hl-comment" style="color: #080">// Get the AssetManager</em>
+    AssetManager manager = getAssets();
+
+    <em class="hl-comment" style="color: #080">// read a Bitmap from Assets</em>
+    InputStream open = null;
+    <span class="hl-keyword">try</span> {
+      open = manager.open(<span class="hl-string" style="color:blue">"logo.png"</span>);
+      Bitmap bitmap = BitmapFactory.decodeStream(open);
+      <em class="hl-comment" style="color: #080">// Assign the bitmap to an ImageView in this layout</em>
+      ImageView view = (ImageView) findViewById(R.id.imageView1);
+      view.setImageBitmap(bitmap);
+    } <span class="hl-keyword">catch</span> (IOException e) {
+      e.printStackTrace();
+    } <span class="hl-keyword">finally</span> {
+      <span class="hl-keyword">if</span> (open != null) {
+        <span class="hl-keyword">try</span> {
+          open.close();
+        } <span class="hl-keyword">catch</span> (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    } </pre><p>
+               
+            </p>
+            <p>
+               You can also access the Drawables
+               from your
+               <code class="filename">res/drawable</code>
+               folder as
+               <code class="code">Bitmap</code>
+               objects in your source code. The following code demonstrates that.
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting">Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_search); </pre><p>
+               
+            </p>
+            <p>You can create a scale bitmap based on a new weight and
+               height
+               definition in pixel.
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting">Bitmap originalBitmap = &lt;initial setup&gt;;
+
+Bitmap resizedBitmap = 
+   Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, false); </pre><p>
+               
+            </p>
+            <p>
+               To convert a
+               <code class="code">Bitmap</code>
+               object
+               into a
+               <code class="code">Drawable</code>
+               you can use the following code.
+               
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting"># Convert Bitmap to Drawable
+Drawable d = <span class="hl-keyword">new</span> BitmapDrawable(getResources(),bitmap); </pre><p>
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="xmldrawables"></a>4.&nbsp;XML Drawables
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="drawables_shape"></a>4.1.&nbsp;Shape Drawables
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  Shape Drawables are XML files which allow to define a geometric
+                  object with colors, borders and gradients which can get assigned to
+                  <code class="code">Views</code>. The advantage of using XML Shape Drawables is that they
+                  automatically adjust to the correct size.
+                  
+               </p>
+               <p>The following listing shows an example of a Shape Drawable.
+                  
+               </p>
+               <p>
+                  
+               </p><pre class="programlisting">&lt;?xml version=<span class="hl-string" style="color:blue">"1.0"</span> encoding=<span class="hl-string" style="color:blue">"UTF-8"</span>?&gt;
+&lt;shape
+  xmlns:android=<span class="hl-string" style="color:blue">"http://schemas.android.com/apk/res/android"</span>
+  android:shape=<span class="hl-string" style="color:blue">"rectangle"</span>&gt;
+  &lt;stroke
+    android:width=<span class="hl-string" style="color:blue">"2dp"</span>
+    android:color=<span class="hl-string" style="color:blue">"#FFFFFFFF"</span> /&gt;
+  &lt;gradient
+    android:endColor=<span class="hl-string" style="color:blue">"#DDBBBBBB"</span>
+    android:startColor=<span class="hl-string" style="color:blue">"#DD777777"</span>
+    android:angle=<span class="hl-string" style="color:blue">"90"</span> /&gt;
+  &lt;corners
+    android:bottomRightRadius=<span class="hl-string" style="color:blue">"7dp"</span>
+    android:bottomLeftRadius=<span class="hl-string" style="color:blue">"7dp"</span>
+    android:topLeftRadius=<span class="hl-string" style="color:blue">"7dp"</span>
+    android:topRightRadius=<span class="hl-string" style="color:blue">"7dp"</span> /&gt;
+&lt;/shape&gt; </pre><p>
+                  
+               </p>
+               <p>You could for example assign that drawable to the background
+                  property of your
+                  layout.
+                  
+               </p>
+               <p>
+                  
+               </p><pre class="programlisting">&lt;?xml version=<span class="hl-string" style="color:blue">"1.0"</span> encoding=<span class="hl-string" style="color:blue">"utf-8"</span>?&gt;
+&lt;LinearLayout xmlns:android=<span class="hl-string" style="color:blue">"http://schemas.android.com/apk/res/android"</span>
+    android:layout_width=<span class="hl-string" style="color:blue">"match_parent"</span>
+    android:layout_height=<span class="hl-string" style="color:blue">"match_parent"</span>
+    android:background=<span class="hl-string" style="color:blue">"@drawable/myshape"</span>
+    android:orientation=<span class="hl-string" style="color:blue">"vertical"</span> &gt;
+
+    &lt;EditText
+        android:id=<span class="hl-string" style="color:blue">"@+id/editText1"</span>
+        android:layout_width=<span class="hl-string" style="color:blue">"match_parent"</span>
+        android:layout_height=<span class="hl-string" style="color:blue">"wrap_content"</span>
+   &gt;
+    &lt;/EditText&gt;
+
+    &lt;RadioGroup
+        android:id=<span class="hl-string" style="color:blue">"@+id/radioGroup1"</span>
+        android:layout_width=<span class="hl-string" style="color:blue">"match_parent"</span>
+        android:layout_height=<span class="hl-string" style="color:blue">"wrap_content"</span> &gt;
+
+        &lt;RadioButton
+            android:id=<span class="hl-string" style="color:blue">"@+id/radio0"</span>
+            android:layout_width=<span class="hl-string" style="color:blue">"wrap_content"</span>
+            android:layout_height=<span class="hl-string" style="color:blue">"wrap_content"</span>
+            android:checked=<span class="hl-string" style="color:blue">"true"</span>
+            android:text=<span class="hl-string" style="color:blue">"@string/celsius"</span> &gt;
+        &lt;/RadioButton&gt;
+
+        &lt;RadioButton
+            android:id=<span class="hl-string" style="color:blue">"@+id/radio1"</span>
+            android:layout_width=<span class="hl-string" style="color:blue">"wrap_content"</span>
+            android:layout_height=<span class="hl-string" style="color:blue">"wrap_content"</span>
+            android:text=<span class="hl-string" style="color:blue">"@string/fahrenheit"</span> &gt;
+        &lt;/RadioButton&gt;
+    &lt;/RadioGroup&gt;
+
+    &lt;Button
+        android:id=<span class="hl-string" style="color:blue">"@+id/button1"</span>
+        android:layout_width=<span class="hl-string" style="color:blue">"wrap_content"</span>
+        android:layout_height=<span class="hl-string" style="color:blue">"wrap_content"</span>
+        android:text=<span class="hl-string" style="color:blue">"@string/calc"</span> 
+        android:onClick=<span class="hl-string" style="color:blue">"myClickHandler"</span>&gt;
+    &lt;/Button&gt;
+
+&lt;/LinearLayout&gt; </pre><p>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="drawables_state"></a>4.2.&nbsp;State Drawables
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  State drawables allow to define states. For each state a
+                  different
+                  drawable can get assigned to the
+                  <code class="code">View</code>. For example the
+                  following
+                  defines different drawables for a button
+                  depending on its
+                  state.
+                  
+               </p>
+               <p>
+                  
+               </p><pre class="programlisting">&lt;?xml version=<span class="hl-string" style="color:blue">"1.0"</span> encoding=<span class="hl-string" style="color:blue">"utf-8"</span>?&gt;
+&lt;selector xmlns:android=<span class="hl-string" style="color:blue">"http://schemas.android.com/apk/res/android"</span>&gt;
+
+  &lt;item android:drawable=<span class="hl-string" style="color:blue">"@drawable/button_pressed"</span>
+    android:state_pressed=<span class="hl-string" style="color:blue">"true"</span> /&gt;
+  &lt;item android:drawable=<span class="hl-string" style="color:blue">"@drawable/button_checked"</span>
+    android:state_checked=<span class="hl-string" style="color:blue">"true"</span> /&gt;
+  &lt;item android:drawable=<span class="hl-string" style="color:blue">"@drawable/button_default"</span> /&gt;
+
+&lt;/selector&gt; </pre><p>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="drawables_transition"></a>4.3.&nbsp;Transition Drawables
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Transition Drawables allow to define transitions which can be
+                  triggered in the coding.
+                  
+               </p>
+               <p>
+                  
+               </p><pre class="programlisting">&lt;?xml version=<span class="hl-string" style="color:blue">"1.0"</span> encoding=<span class="hl-string" style="color:blue">"utf-8"</span>?&gt;
+&lt;transition xmlns:android=<span class="hl-string" style="color:blue">"http://schemas.android.com/apk/res/android"</span>&gt;
+  &lt;item android:drawable=<span class="hl-string" style="color:blue">"@drawable/first_image"</span> /&gt;
+  &lt;item android:drawable=<span class="hl-string" style="color:blue">"@drawable/second_image"</span> /&gt;
+&lt;/transition&gt; </pre><p>
+                  
+               </p>
+               <p>
+                  
+               </p><pre class="programlisting"><span class="hl-keyword">final</span> ImageView image = (ImageView) findViewById(R.id.image);
+<span class="hl-keyword">final</span> ToggleButton button = (ToggleButton) findViewById(R.id.button);
+button.setOnClickListener(<span class="hl-keyword">new</span> OnClickListener() {
+  <em><span class="hl-annotation" style="color: gray">@Override</span></em>
+  <span class="hl-keyword">public</span> <span class="hl-keyword">void</span> onClick(<span class="hl-keyword">final</span> View v) {
+    TransitionDrawable drawable = (TransitionDrawable) image.getDrawable();
+    <span class="hl-keyword">if</span> (button.isChecked()) {
+      drawable.startTransition(<span class="hl-number">500</span>);
+    } <span class="hl-keyword">else</span> {
+      drawable.reverseTransition(<span class="hl-number">500</span>);
+    }
+  }
+}); </pre><p>
+                  
+               </p>
+            </div>
+         </div> 
+         
+         <!-- Chitika 550x250 MEGA Unit CODE for Vogella--> 
+         <script type="text/javascript">(function(){if(window.CHITIKA===undefined){window.CHITIKA={'units':[]};};var unit={"calltype":"async[2]","publisher":"vogella","width":550,"height":250,"sid":"Chitika Default"};var placement_id=window.CHITIKA.units.length;window.CHITIKA.units.push(unit);document.write('<div id="chitikaAdBlock-'+placement_id+'"></div>');}());</script><div id="chitikaAdBlock-1"></div>
+         
+         <script type="text/javascript" src="http://cdn.chitika.net/getads.js" async="async"></script>
+         
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="animationdrawables"></a>5.&nbsp;Animation Drawables
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               You can also define an animation drawables and assign it to a
+               <code class="code">View</code>
+               via
+               the
+               <code class="code">setBackgroundResource()</code>
+               method.
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting">&lt;!-- Animation frames are phase*.png files inside the
+ res/drawable/ folder --&gt;
+ &lt;animation-list android:id=<span class="hl-string" style="color:blue">"@+id/selected"</span> android:oneshot=<span class="hl-string" style="color:blue">"false"</span>&gt;
+    &lt;item android:drawable=<span class="hl-string" style="color:blue">"@drawable/phase1"</span> android:duration=<span class="hl-string" style="color:blue">"400"</span> /&gt;
+    &lt;item android:drawable=<span class="hl-string" style="color:blue">"@drawable/phase2"</span> android:duration=<span class="hl-string" style="color:blue">"400"</span> /&gt;
+    &lt;item android:drawable=<span class="hl-string" style="color:blue">"@drawable/phase3"</span> android:duration=<span class="hl-string" style="color:blue">"400"</span> /&gt;
+ &lt;/animation-list&gt; </pre><p>
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting">ImageView img = (ImageView)findViewById(R.id.yourid);
+img.setBackgroundResource(R.drawable.your_animation_file);
+
+ <em class="hl-comment" style="color: #080">// Get the AnimationDrawable object.</em>
+ AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
+
+ <em class="hl-comment" style="color: #080">// Start the animation (looped playback by default).</em>
+ frameAnimation.start(); </pre><p>
+               
+            </p>
+            <p>
+               Alternative you can implement a class which extends
+               <code class="code">Drawable</code>
+               and implements
+               <code class="code">Animatable</code>.
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="drawables_9patch"></a>6.&nbsp;9 Patch Drawables
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <em class="wordasword">9 Patch drawables</em>
+               are
+               <em class="wordasword">Drawables</em>
+               which have a one pixel additional border. On the top and
+               left you
+               define the area which should be scaled if the
+               <em class="wordasword">Drawable</em>
+               is to small for the
+               view. This is the stretch area.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Android Drawables - Tutorial_files/x9patchdrawable10.png.pagespeed.ic.9MXYw_gR83.png" alt="Defining the 9 patch Drawable stretch area"></div>
+            <p>
+               
+            </p>
+            <p>
+               On the right and bottom side you define the area where a text should
+               be
+               placed
+               if this
+               <code class="code">Drawable</code>
+               is used on a
+               view
+               which can write text on it, e.g. a Button.
+               
+            </p>
+            <p>
+               The ADT supplies the
+               <em class="parameter"><code>draw9patch</code></em>
+               program in the
+               <code class="filename">android-sdk/tools</code>
+               installation folder, which makes it easy to
+               create
+               <em class="wordasword">9 Patch drawables</em>.
+               
+            </p>
+            <p>
+               A nice online generator for 9 patch drawables can be found under the
+               following URL:
+               <a class="ulink" href="http://android-ui-utils.googlecode.com/hg/asset-studio/dist/nine-patches.html" target="_top">Simple Nine-patch generator</a>.
+               
+            </p>
+         </div>
+         
+         <!-- Chitika 728x90 LEADERBOARD CODE for Vogella--> 
+         <script type="text/javascript">(function(){if(window.CHITIKA===undefined){window.CHITIKA={'units':[]};};var unit={"calltype":"async[2]","publisher":"vogella","width":728,"height":90,"sid":"Chitika Default"};var placement_id=window.CHITIKA.units.length;window.CHITIKA.units.push(unit);document.write('<div id="chitikaAdBlock-'+placement_id+'"></div>');}());</script><div id="chitikaAdBlock-2"></div>
+         <script type="text/javascript" src="http://cdn.chitika.net/getads.js" async="async"></script>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="drawables_custom1"></a>7.&nbsp;Custom Drawables
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               You can also create custom
+               <em class="wordasword">Drawable</em>, which can use the Canvas
+               API for their display. For these drawables
+               you can use the full Canvas API to design them to your need.
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="drawables_custom2"></a>8.&nbsp;Exercise: Create Custom Drawables
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Note</h3>
+               <p>
+                  This example is based on a
+                  <a class="ulink" href="http://www.curious-creature.org/2012/12/11/android-recipe-1-image-with-rounded-corners/" target="_top">Blog post from Roman Guy</a>.
+                  
+               </p>
+            </div>
+            <p>
+               Create the following Android project called
+               <em class="wordasword">com.vogella.android.drawables.custom</em>
+               based on the
+               <em class="wordasword">Empty Activity</em>
+               template.
+               
+            </p>
+            <p>
+               Create the following custom
+               <em class="wordasword">Drawable</em>
+               class.
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting"><span class="hl-keyword">package</span> com.vogella.android.drawables.custom;
+
+<span class="hl-keyword">import</span> android.graphics.Bitmap;
+<span class="hl-keyword">import</span> android.graphics.BitmapShader;
+<span class="hl-keyword">import</span> android.graphics.Canvas;
+<span class="hl-keyword">import</span> android.graphics.ColorFilter;
+<span class="hl-keyword">import</span> android.graphics.Paint;
+<span class="hl-keyword">import</span> android.graphics.PixelFormat;
+<span class="hl-keyword">import</span> android.graphics.RectF;
+<span class="hl-keyword">import</span> android.graphics.Shader;
+<span class="hl-keyword">import</span> android.graphics.drawable.Drawable;
+
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> MyRoundCornerDrawable <span class="hl-keyword">extends</span> Drawable {
+
+  <span class="hl-keyword">private</span> Paint paint;
+
+  <span class="hl-keyword">public</span> MyRoundCornerDrawable(Bitmap bitmap) {
+    BitmapShader shader;
+    shader = <span class="hl-keyword">new</span> BitmapShader(bitmap, Shader.TileMode.CLAMP,
+        Shader.TileMode.CLAMP);
+    paint = <span class="hl-keyword">new</span> Paint();
+    paint.setAntiAlias(true);
+    paint.setShader(shader);
+  }
+
+  <em><span class="hl-annotation" style="color: gray">@Override</span></em>
+  <span class="hl-keyword">public</span> <span class="hl-keyword">void</span> draw(Canvas canvas) {
+    <span class="hl-keyword">int</span> height = getBounds().height();
+    <span class="hl-keyword">int</span> width = getBounds().width();
+    RectF rect = <span class="hl-keyword">new</span> RectF(<span class="hl-number">0.0f</span>, <span class="hl-number">0.0f</span>, width, height);
+    canvas.drawRoundRect(rect, <span class="hl-number">30</span>, <span class="hl-number">30</span>, paint);
+  }
+
+  <em><span class="hl-annotation" style="color: gray">@Override</span></em>
+  <span class="hl-keyword">public</span> <span class="hl-keyword">void</span> setAlpha(<span class="hl-keyword">int</span> alpha) {
+    paint.setAlpha(alpha);
+  }
+
+  <em><span class="hl-annotation" style="color: gray">@Override</span></em>
+  <span class="hl-keyword">public</span> <span class="hl-keyword">void</span> setColorFilter(ColorFilter cf) {
+    paint.setColorFilter(cf);
+  }
+
+  <em><span class="hl-annotation" style="color: gray">@Override</span></em>
+  <span class="hl-keyword">public</span> <span class="hl-keyword">int</span> getOpacity() {
+    <span class="hl-keyword">return</span> PixelFormat.TRANSLUCENT;
+  }
+
+} </pre><p>
+               
+            </p>
+            <p>To use it change your layout file to the following.</p>
+            <p>
+               
+            </p><pre class="programlisting">&lt;RelativeLayout xmlns:android=<span class="hl-string" style="color:blue">"http://schemas.android.com/apk/res/android"</span>
+    xmlns:tools=<span class="hl-string" style="color:blue">"http://schemas.android.com/tools"</span>
+    android:layout_width=<span class="hl-string" style="color:blue">"match_parent"</span>
+    android:layout_height=<span class="hl-string" style="color:blue">"match_parent"</span>
+    tools:context=<span class="hl-string" style="color:blue">".MainActivity"</span> &gt;
+
+    &lt;ImageView
+        android:id=<span class="hl-string" style="color:blue">"@+id/image"</span>
+        android:layout_width=<span class="hl-string" style="color:blue">"fill_parent"</span>
+        android:layout_height=<span class="hl-string" style="color:blue">"fill_parent"</span>
+        android:layout_centerHorizontal=<span class="hl-string" style="color:blue">"true"</span>
+        android:layout_centerVertical=<span class="hl-string" style="color:blue">"true"</span>
+        android:contentDescription=<span class="hl-string" style="color:blue">"TODO"</span> /&gt;
+
+&lt;/RelativeLayout&gt; </pre><p>
+               
+            </p>
+            <p>
+               Change your
+               <code class="code">MainActivity</code>
+               class to the following. The code assumes that you have a bitmap in
+               your
+               <code class="filename">drawable</code>
+               folder called
+               <code class="filename">dog.png</code>.
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting"><span class="hl-keyword">package</span> com.vogella.android.drawables.custom;
+
+<span class="hl-keyword">import</span> java.io.InputStream;
+
+<span class="hl-keyword">import</span> android.app.Activity;
+<span class="hl-keyword">import</span> android.graphics.Bitmap;
+<span class="hl-keyword">import</span> android.graphics.BitmapFactory;
+<span class="hl-keyword">import</span> android.os.Bundle;
+<span class="hl-keyword">import</span> android.view.Menu;
+<span class="hl-keyword">import</span> android.widget.ImageView;
+
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> MainActivity <span class="hl-keyword">extends</span> Activity {
+
+  <em><span class="hl-annotation" style="color: gray">@Override</span></em>
+  <span class="hl-keyword">protected</span> <span class="hl-keyword">void</span> onCreate(Bundle savedInstanceState) {
+    <span class="hl-keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ImageView button = (ImageView) findViewById(R.id.image);
+    InputStream resource = getResources().openRawResource(R.drawable.dog);
+    Bitmap bitmap = BitmapFactory.decodeStream(resource);
+    button.setBackground(<span class="hl-keyword">new</span> MyRoundCornerDrawable(bitmap));
+  }
+
+} </pre><p>
+               
+            </p>
+         </div> 
+         
+         <!-- Chitika 728x90 LEADERBOARD CODE -->
+         <script type="text/javascript">(function(){if(window.CHITIKA===undefined){window.CHITIKA={'units':[]};};var unit={"calltype":"async[2]","publisher":"vogella","width":728,"height":90,"sid":"Chitika Default"};var placement_id=window.CHITIKA.units.length;window.CHITIKA.units.push(unit);document.write('<div id="chitikaAdBlock-'+placement_id+'"></div>');}());</script><div id="chitikaAdBlock-3"></div>
+         <script type="text/javascript" src="http://cdn.chitika.net/getads.js" async="async"></script>
+         
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="thankyou"></a>9.&nbsp;Support this website
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               This tutorial is Open Content under the
+               <a class="ulink" href="http://creativecommons.org/licenses/by-nc-sa/3.0/de/deed.en" target="_top">
+                  CC BY-NC-SA 3.0 DE</a>
+               license. Source code in this tutorial is distributed under the
+               <a class="ulink" href="https://www.eclipse.org/legal/epl-v10.html" target="_top">Eclipse Public License</a>.
+               See the
+               <a class="ulink" href="http://www.vogella.com/license.html" target="_top">vogella License</a> page
+               for details on the terms of reuse.
+               
+            </p>
+            <p>
+               Writing and updating these tutorials is a lot of work.
+               If this free community service was helpful,
+               you can support the cause by giving a tip
+               as well as reporting typos and factual errors.
+               
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="thankyou"></a>9.1.&nbsp;Thank you
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  
+                  	
+               </p>
+               <p></p>
+               <p>
+                  	Please consider a contribution if this article helped you.
+                  	
+               </p>
+               <table style="border: none;">
+                  <tbody><tr>
+                     			
+                     <td>
+                        				<a href="http://flattr.com/thing/49772/Tutorials-for-Eclipse-Java-Android-and-Webprogramming" target="_blank">
+                           					<img src="./Android Drawables - Tutorial_files/xflattr.png.pagespeed.ic.5ZB2lDsqgv.png" alt="Flattr this" title="Flattr this" border="0">
+                           				</a>
+                        			
+                     </td>
+                     
+                     			
+                     <td>
+                        				
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                           					<input type="hidden" name="cmd" value="_s-xclick">
+                           					<input type="hidden" name="hosted_button_id" value="10463995">
+                           					<input type="image" src="./Android Drawables - Tutorial_files/xvogella-donate-transparent.png.pagespeed.ic.8vWXnZXSrJ.png" border="0" name="submit" alt="PayPal Donate">
+                           				
+                        </form>
+                        			
+                     </td>
+                     		
+                  </tr>
+               </tbody></table>
+               <p>
+                  
+                  
+                  
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="questions"></a>9.2.&nbsp;Questions and Discussion
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  If you find errors in this tutorial, please notify me
+                  (see the
+                  <a class="ulink" href="http://www.vogella.com/tutorials/AndroidDrawables/article.html#top" target="_top">top of the page</a>).
+                  Please note that due to the high volume of feedback I
+                  receive, I
+                  cannot answer questions to your implementation. Ensure you
+                  have read
+                  the
+                  <a class="ulink" href="http://www.vogella.com/faq.html" target="_top">vogella FAQ</a>
+                  as
+                  I don't respond to questions already answered there.
+                  
+               </p>
+            </div>
+         </div>
+         <script async="async" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+         
+         <!-- Article - After support -->
+         <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3851443674951530" data-ad-slot="8639282357"></ins>
+         <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="resources"></a>10.&nbsp;Links and Literature
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="sourcecode"></a>10.1.&nbsp;Source Code
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/code/index.html" target="_top">Source Code of Examples</a>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="resources_android"></a>10.2.&nbsp;Android Widget Resources
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  <a class="ulink" href="http://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/appwidget/index.html" target="_top">
+                     Example Widget from Android API demos</a>
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://code.google.com/p/wiktionary-android/source/browse/trunk/Wiktionary/src/com/example/android/wiktionary/" target="_top">
+                     Wiktionary Example Widget</a>
+                  
+               </p>
+               http://code.google.com/p/wiktionary-android/source/browse/trunk/Wiktionary/src/com/example/android/wiktionary/
+               
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="resources_android"></a>10.3.&nbsp;Android Resources
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/tutorials/Android/article.html" target="_top">
+                     Introduction to Android Development</a>
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/tutorials/AndroidBackgroundProcessing/article.html" target="_top">
+                     Background processing in Android</a>
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/tutorials/AndroidServices/article.html" target="_top">
+                     Android Service and BroadcastReceiver Tutorial</a>
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/tutorials/AndroidLocationAPI/article.html" target="_top">
+                     Android Location API and Google Maps</a>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="resources_general"></a>10.4.&nbsp;vogella Resources
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/training/" target="_top">vogella Training</a> Android and Eclipse Training from the vogella team
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/tutorials/Android/article.html" target="_top">Android Tutorial</a> Introduction to Android Programming
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/tutorials/GWT/article.html" target="_top">GWT Tutorial</a> Program in Java, compile to JavaScript and HTML
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/tutorials/EclipseRCP/article.html" target="_top">Eclipse RCP Tutorial</a> Create native applications in Java
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/tutorials/JUnit/article.html" target="_top">JUnit Tutorial</a> Test your application
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/tutorials/Git/article.html" target="_top">Git Tutorial</a> Put all your files in a distributed version control system
+                  
+               </p>
+            </div>
+         </div><img src="./Android Drawables - Tutorial_files/4de55aa43f9440f185ca66090208db2d" width="1" height="1" alt=""></div>
+      
+      
+      
+   <script pagespeed_no_defer="">//<![CDATA[
+(function(){var c=encodeURIComponent,f=window,h="performance",k="",l="&",m="&b_csi=",n="&cces=",p="&ccis=",q="&ccos=",r="&ccrl=",s="&ccul=",t="&connect=",u="&dns=",v="&dom_c=",w="&dwld=",x="&fp=",y="&htmlAt=",z="&ifr=0",A="&ifr=1",B="&nav=",C="&nrp=",D="&nt=",E="&r",F="&ref=",G="&req_start=",H="&ttfb=",I="&url=",J="=",K="?",L="EventStart",M="beforeunload",N="ets=",O="load",P="load:",Q="on",R="unload:";f.pagespeed=f.pagespeed||{};var S=f.pagespeed,T=function(a,d,b,e){this.d=a;this.a=d;this.b=b;this.e=e};
+S.beaconUrl=k;
+T.prototype.c=function(){var a=this.d,d=f.mod_pagespeed_start,b=Number(new Date)-d,a=a+(-1==a.indexOf(K)?K:l),a=a+N+(this.a==O?P:R),a=a+b;if(this.a!=M||!f.mod_pagespeed_loaded){a+=E+this.a+J;if(f[h]){var b=f[h].timing,e=b.navigationStart,g=b.requestStart,a=a+(b[this.a+L]-e),a=a+(B+(b.fetchStart-e)),a=a+(u+(b.domainLookupEnd-b.domainLookupStart)),a=a+(t+(b.connectEnd-b.connectStart)),a=a+(G+(g-e)),a=a+(H+(b.responseStart-g)),a=a+(w+(b.responseEnd-b.responseStart)),a=a+(v+(b.domContentLoadedEventStart-e));
+f[h].navigation&&(a+=D+f[h].navigation.type);e=-1;b.msFirstPaint?e=b.msFirstPaint:f.chrome&&f.chrome.loadTimes&&(e=Math.floor(1E3*f.chrome.loadTimes().firstPaintTime));-1!=e&&(a+=x+(e-g))}else a+=b;S.getResourceTimingData&&f.parent==f&&(a+=S.getResourceTimingData());a+=f.parent!=f?A:z;this.a==O&&(f.mod_pagespeed_loaded=!0,(b=f.mod_pagespeed_num_resources_prefetched)&&(a+=C+b),(b=f.mod_pagespeed_prefetch_start)&&(a+=y+(d-b)));S.panelLoader&&(d=S.panelLoader.getCsiTimingsString(),d!=k&&(a+=m+d));S.criticalCss&&
+(d=S.criticalCss,a+=p+d.total_critical_inlined_size+n+d.total_original_external_size+q+d.total_overhead_size+r+d.num_replaced_links+s+d.num_unreplaced_links);this.b!=k&&(a+=this.b);document.referrer&&(a+=F+c(document.referrer));a+=I+c(this.e);S.beaconUrl=a;(new Image).src=a}};S.f=function(a,d,b,e){var g=new T(a,d,b,e);f.addEventListener?f.addEventListener(d,function(){g.c()},!1):f.attachEvent(Q+d,function(){g.c()})};S.addInstrumentationInit=S.f;})();
+
+pagespeed.addInstrumentationInit('/mod_pagespeed_beacon', 'load', '', 'http://www.vogella.com/tutorials/AndroidDrawables/article.html');
+//]]></script>
+</body></html>
